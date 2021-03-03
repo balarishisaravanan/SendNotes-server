@@ -8,9 +8,6 @@ const notes = require("./routes/notes");
 const app = express();
 //mount
 app.use("/api/v1/notes", notes);
-app.get("/", (req, res) => {
-  res.send("hello");
-});
 
 const PORT = process.env.PORT || 5000;
 app.listen(
