@@ -1,15 +1,18 @@
 const express = require("express");
 const dotenv = require("dotenv");
-const logger = require("./middleware/logger");
-//load env
+const morgan = require("morgan");
+
+//Load env
 dotenv.config({ path: "./config/config.env" });
-// load routes
+// Load routes
 const notes = require("./routes/notes");
 
 const app = express();
-
-//mount routers
-app.use(logger);
+// Load Dev logger middleware
+if (process.env.NODE_ENV === "development") {
+  app.use(morgan("dev"));
+}
+//Mount routers
 app.use("/api/v1/notes", notes);
 
 const PORT = process.env.PORT || 5000;
