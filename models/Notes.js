@@ -42,16 +42,17 @@ const NotesSchema = new mongoose.Schema({
   },
   notesType: {
     type: String,
-    enum: [handwritten, typed],
+    enum: ["handwritten", "typed"],
   },
   uploadedAt: {
     type: Date,
     default: Date.now,
   },
-  uploadedBy: {
+
+  uploadedFile: {
     type: String,
-    required: true,
+    required: [true, "Please select notes to upload!"],
   },
 });
 
-module.exports = mongoose.model("Notes", "NotesSchema");
+module.exports = mongoose.model("Notes", NotesSchema);

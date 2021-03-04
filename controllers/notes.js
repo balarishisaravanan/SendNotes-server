@@ -1,3 +1,4 @@
+const Notes = require("../models/Notes");
 // @desc Get all notes
 // @route GET /api/v1/notes/fetch
 // @access Public
@@ -22,6 +23,7 @@ exports.getSingleNotes = (req, res, next) => {
 // @route POST /api/v1/notes/upload/
 // @access Private
 exports.uploadNotes = (req, res, next) => {
+  console.log(req.body);
   res.status(200).json({
     success: true,
     msg: "Upload notes.",
