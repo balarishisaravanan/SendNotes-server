@@ -13,6 +13,8 @@ connectDB();
 const notes = require("./routes/notes");
 
 const app = express();
+//Body Parser
+app.use(express.json());
 
 // Load Dev logger middleware
 if (process.env.NODE_ENV === "development") {
@@ -32,6 +34,4 @@ const server = app.listen(
 //Handle Unhandled promise rejections
 process.on("unhandledRejection", (err, promise) => {
   console.log(`Error: ${err.message}`);
-  //Close server and exit the process
-  server.close(() => process.exit(1));
 });
