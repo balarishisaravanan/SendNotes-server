@@ -1,8 +1,8 @@
 const mongoose = require("mongoose");
 const NotesSchema = new mongoose.Schema({
-  name: {
+  title: {
     type: String,
-    required: ["true", "please add name"],
+    required: ["true", "please add title"],
     maxlength: 60,
   },
   slug: String,

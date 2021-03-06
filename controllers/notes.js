@@ -22,11 +22,11 @@ exports.getSingleNotes = (req, res, next) => {
 // @desc Upload Notes
 // @route POST /api/v1/notes/upload/
 // @access Private
-exports.uploadNotes = (req, res, next) => {
-  console.log(req.body);
-  res.status(200).json({
+exports.uploadNotes = async (req, res, next) => {
+  const notes = await Notes.create(req.body);
+  res.status(201).json({
     success: true,
-    msg: "Upload notes.",
+    data: notes,
   });
 };
 
