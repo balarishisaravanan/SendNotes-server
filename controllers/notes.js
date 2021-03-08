@@ -1,5 +1,7 @@
+const ErrorResponse = require("../utils/ErrorResponse");
 const { json } = require("express");
 const Notes = require("../models/Notes");
+
 // @desc Get all notes
 // @route GET /api/v1/notes/fetch
 // @access Public
@@ -23,11 +25,11 @@ exports.getSingleNotes = async (req, res, next) => {
   try {
     const singleNotes = await Notes.findById(req.params.id);
     if (!singleNotes) {
-      return res.status(400).json({ success: false });
+      return next(error);
     }
     res.status(200).json({ success: true, data: singleNotes });
   } catch (error) {
-    res.status(400).json({ success: false });
+    next(error);
   }
 };
 
@@ -42,10 +44,7 @@ exports.uploadNotes = async (req, res, next) => {
       data: notes,
     });
   } catch (error) {
-    res.status(400).json({
-      success: false,
-      msg: "bad request",
-    });
+    next(error);
   }
 };
 
@@ -59,16 +58,14 @@ exports.updateNotes = async (req, res, next) => {
       runValidators: true,
     });
     if (!notes) {
-      return res.status(400).json("success:false");
+      return next(error);
     }
     res.status(200).json({
       success: true,
       data: notes,
     });
   } catch (error) {
-    res.status(400).json({
-      success: false,
-    });
+    next(error);
   }
 };
 
@@ -79,15 +76,10 @@ exports.deleteNotes = async (req, res, next) => {
   try {
     const notes = await Notes.findByIdAndDelete(req.params.id);
     if (!notes) {
-      return res.status(400).json({
-        success: false,
-        msg: "not found",
-      });
+      next(error);
     }
     res.status(200).json({ success: true, data: {} });
   } catch (error) {
-    res.status(400).json({
-      success: false,
-    });
+    next(error);
   }
 };
