@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const slugify = require("slugify");
 const NotesSchema = new mongoose.Schema({
   title: {
     type: String,
@@ -53,6 +54,12 @@ const NotesSchema = new mongoose.Schema({
     type: String,
     required: [true, "Please select notes to upload!"],
   },
+});
+
+//Create Slug
+NotesSchema.pre("save", function () {
+  this.slug =
+    this.id + "-" + slugify(this.title, { lower: true, remove: undefined });
 });
 
 module.exports = mongoose.model("Notes", NotesSchema);
