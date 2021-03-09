@@ -20,15 +20,15 @@ const NotesSchema = new mongoose.Schema({
   },
   department: {
     type: String,
-    required: true,
+    required: [true, "You must enter the department"],
   },
   subjectcode: {
     type: String,
-    required: true,
+    required: [true, "You must enter your subject code"],
   },
   regulation: {
     type: Number,
-    required: true,
+    required: [true, "You must enter the regulation for your notes"],
     enum: [2013, 2017, 2018],
   },
   averageRating: {
@@ -38,7 +38,7 @@ const NotesSchema = new mongoose.Schema({
   },
   preview: {
     type: String,
-    required: true,
+    required: [true, "Please add the preview"],
   },
   notesType: {
     type: String,
