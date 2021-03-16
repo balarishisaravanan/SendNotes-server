@@ -44,6 +44,7 @@ const NotesSchema = new mongoose.Schema({
   notesType: {
     type: String,
     enum: ["handwritten", "typed"],
+    required: [true, "Please choose handwritten or typed."],
   },
   uploadedAt: {
     type: Date,
@@ -59,7 +60,9 @@ const NotesSchema = new mongoose.Schema({
 //Create Slug
 NotesSchema.pre("save", function () {
   this.slug =
-    this.id + "-" + slugify(this.title, { lower: true, remove: undefined });
+    slugify(this.title, { lower: true, remove: undefined }) +
+    "-" +
+    this.id.slice(15, 23);
 });
 
 module.exports = mongoose.model("Notes", NotesSchema);
