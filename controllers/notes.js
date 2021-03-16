@@ -7,7 +7,7 @@ const Notes = require("../models/Notes");
 // @route GET /api/v1/notes/fetch
 // @access Public
 exports.getNotes = asyncHandler(async (req, res, next) => {
-  const notes = await Notes.find();
+  const notes = await Notes.find(req.query);
   res.status(200).json({
     success: true,
     count: notes.length,
