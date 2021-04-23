@@ -30,7 +30,9 @@ exports.getSingleNotes = asyncHandler(async (req, res, next) => {
 // @route POST /api/v1/notes/upload/
 // @access Private
 exports.uploadNotes = asyncHandler(async (req, res, next) => {
+  console.log(req.body);
   const notes = await Notes.create(req.body);
+
   res.status(201).json({
     success: true,
     data: notes,

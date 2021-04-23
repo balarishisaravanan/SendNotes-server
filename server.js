@@ -1,6 +1,7 @@
 const express = require("express");
 const dotenv = require("dotenv");
 const morgan = require("morgan");
+const fileupload = require("express-fileupload");
 const connectDB = require("./config/db");
 const errorHandler = require("./middleware/errorHandler");
 
@@ -14,6 +15,8 @@ connectDB();
 const notes = require("./routes/notes");
 
 const app = express();
+//Fileupload
+app.use(fileupload());
 //Body Parser
 app.use(express.json());
 

@@ -3,7 +3,7 @@ const slugify = require("slugify");
 const NotesSchema = new mongoose.Schema({
   title: {
     type: String,
-    required: ["true", "please add title"],
+    required: [true, "please add title"],
     maxlength: 60,
   },
   slug: String,
@@ -52,8 +52,9 @@ const NotesSchema = new mongoose.Schema({
   },
 
   uploadedFile: {
-    type: String,
+    type: Buffer,
     required: [true, "Please select notes to upload!"],
+    contentType: String,
   },
 });
 
