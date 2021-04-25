@@ -13,6 +13,7 @@ connectDB();
 
 // Load routes
 const notes = require("./routes/notes");
+const auth = require("./routes/auth");
 
 const app = express();
 
@@ -26,6 +27,7 @@ if (process.env.NODE_ENV === "development") {
 //Mount routers
 app.use("/api/v1/notes", notes);
 app.use(errorHandler);
+app.use("/api/v1/auth", auth);
 
 const PORT = process.env.PORT || 5000;
 const server = app.listen(

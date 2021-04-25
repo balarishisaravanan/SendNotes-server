@@ -49,7 +49,7 @@ const NotesSchema = new mongoose.Schema({
   },
 
   uploadedFile: {
-    type: text,
+    type: String,
     required: [
       true,
       "Please upload the notes in google drive and paste the link.",

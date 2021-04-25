@@ -13,16 +13,17 @@ const UserSchema = new mongoose.Schema({
       "Please enter valid email",
     ],
   },
-  role: {
-    type: string,
-    enum: ["user"],
-    default: "user",
-  },
+
   password: {
-    type: String.length,
+    type: String,
     required: [true, "please enter a password"],
     minlength: 6,
-    select: false, //Won't return the password on the response body.
+    select: false, //Will not return the password in the response body.
+  },
+  role: {
+    type: string,
+    enum: ["user", "mod"],
+    default: "user",
   },
   resetPasswordToken: String,
   restPasswordExpire: Date,
