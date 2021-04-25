@@ -21,7 +21,7 @@ const UserSchema = new mongoose.Schema({
     select: false, //Will not return the password in the response body.
   },
   role: {
-    type: string,
+    type: String,
     enum: ["user", "mod"],
     default: "user",
   },
