@@ -15,8 +15,7 @@ connectDB();
 const notes = require("./routes/notes");
 
 const app = express();
-//Fileupload
-app.use(fileupload());
+
 //Body Parser
 app.use(express.json());
 

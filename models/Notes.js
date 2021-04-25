@@ -37,10 +37,7 @@ const NotesSchema = new mongoose.Schema({
     min: [1, "Rating must be atleast 1"],
     max: [5, "Rating must not exceed 5"],
   },
-  preview: {
-    type: String,
-    required: [true, "Please add the preview"],
-  },
+
   notesType: {
     type: String,
     enum: ["handwritten", "typed"],
@@ -52,8 +49,11 @@ const NotesSchema = new mongoose.Schema({
   },
 
   uploadedFile: {
-    type: Buffer,
-    required: [true, "Please select notes to upload!"],
+    type: text,
+    required: [
+      true,
+      "Please upload the notes in google drive and paste the link.",
+    ],
     contentType: String,
   },
 });
