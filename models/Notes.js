@@ -56,6 +56,11 @@ const NotesSchema = new mongoose.Schema({
     ],
     contentType: String,
   },
+  user: {
+    type: mongoose.Schema.ObjectId,
+    ref: "User",
+    required: true,
+  },
 });
 
 //Create Slug
