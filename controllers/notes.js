@@ -45,13 +45,22 @@ exports.uploadNotes = asyncHandler(async (req, res, next) => {
 // @route PUT /api/v1/notes/update/:id
 // @access Private
 exports.updateNotes = asyncHandler(async (req, res, next) => {
-  const notes = await Notes.findByIdAndUpdate(req.params.id, req.body, {
-    new: true,
-    runValidators: true,
-  });
+  let notes = await Notes.findById(req.params.id);
+
   if (!notes) {
     return next(error);
   }
+  //Make sure the user is owner of the uploaded notes.
+  if (notes.user.toString() != req.user.id && req.user.role !== "mod") {
+    return next(
+      new ErrorResponse(`User is not authorized to update this`, 401)
+    );
+  }
+  notes = await Notes.findOneAndUpdate(req.params.id, req.body, {
+    new: true,
+    runValidators: true,
+  });
+
   res.status(200).json({
     success: true,
     data: notes,
@@ -62,9 +71,17 @@ exports.updateNotes = asyncHandler(async (req, res, next) => {
 // @route DELETE /api/v1/notes/delete/:id
 // @access Private
 exports.deleteNotes = asyncHandler(async (req, res, next) => {
-  const notes = await Notes.findByIdAndDelete(req.params.id);
+  const notes = await Notes.findById(req.params.id);
   if (!notes) {
     next(error);
   }
+  //Make sure the user is owner of the uploaded notes.
+  if (notes.user.toString() != req.user.id && req.user.role !== "mod") {
+    return next(
+      new ErrorResponse(`User is not authorized to delete this`, 401)
+    );
+  }
+
+  notes.remove();
   res.status(200).json({ success: true, data: {} });
 });
