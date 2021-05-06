@@ -32,6 +32,8 @@ exports.getSingleNotes = asyncHandler(async (req, res, next) => {
 exports.uploadNotes = asyncHandler(async (req, res, next) => {
   //Add user to req.body
   req.body.user = req.user.id;
+  //Add UploadedBy (username) to body
+  req.body.uploadedBy = req.user.name;
 
   const notes = await Notes.create(req.body);
 
