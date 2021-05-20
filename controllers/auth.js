@@ -103,6 +103,8 @@ const sendTokenResponse = (user, statusCode, res) => {
     expires: new Date(
       Date.now() + process.env.JWT_COOKIE_EXPIRE * 24 * 60 * 60 * 1000
     ), //calculate it to 30 days.
+    sameSite: "strict",
+    path: "/",
     httpOnly: true,
   };
   //make it https when it is in production.
