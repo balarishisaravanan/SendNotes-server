@@ -1,2 +1,2 @@
 # SendNotes-server
-This is the backend for my SendNotes web application 
+This is the backend for the SendNotes web application 
